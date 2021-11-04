@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class BSUFacultyBook extends RecordBook{
+    private Scanner finder;
+    private String person;
     private ArrayList<Contact>allContacts;
     public BSUFacultyBook(String bookName){
         super(bookName);
@@ -18,9 +20,6 @@ public class BSUFacultyBook extends RecordBook{
 
     @Override
     public Contact findContact(String name) {
-        System.out.println("Enter the name ");
-        var finder = new Scanner(System.in);
-        var person = finder.toString();
         for (var currentSearch : allContacts){
             if (currentSearch.getName() == person);
             System.out.println(currentSearch.getName());
@@ -30,7 +29,7 @@ public class BSUFacultyBook extends RecordBook{
             return currentSearch;
         }
 
-
+        return null;
     }
 
     public void LoadData(){
@@ -47,10 +46,14 @@ public class BSUFacultyBook extends RecordBook{
             var splitLine = line.split(",");
             var name = splitLine[0];
             var number= splitLine[1];
-            var info = splitLine[3];
+            var info = splitLine[2];
             var contact = new Contact(name,number,info);
             allContacts.add(contact);
         }
+        System.out.println("enter the name of a person to search");
+        finder= new Scanner(System.in);
+        person = finder.toString();
+        findContact(person);
 
     }
 }
